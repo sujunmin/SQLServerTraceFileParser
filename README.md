@@ -11,6 +11,7 @@ Parse SQL Server Trace Files and Build Simple Alert System for Audit
 2. Build Table `$TraceFileData` in `$AuditDB` by using `TraceFileData.sql`.
 3. Set up arguments in `TraceFileParser.ps1`.
 4. Run and Test.
+5. Use `SaveTraceFile.ps1` to save data into files.
 
 ## To-Do
 1. Alert mail content need to be html for clearifing output.
