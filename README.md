@@ -14,4 +14,4 @@ Parse SQL Server Trace Files and Build Simple Alert System for Audit
 5. Use `SaveTraceFile.ps1` to save data into files.
 
 ## To-Do
-1. Alert mail content need to be html for clearifing output.
+1. ~~Alert mail content need to be html for clearifing output.~~ Use [this](https://www.virtualobjectives.com.au/sqlserver/saving_to_html.htm) for HTML Output, Please read the manual from the link.
