@@ -21,12 +21,11 @@ $FromDirs | Foreach-Object {
 	    		$output = & sqlcmd -S $AuditDBServer -U $AuditDBUserName -P $AuditDBPassword -Q "$($sql)" -d $AuditDB # Insert trace file data into table
  
 			if ($output -like "*個受影響的資料列*") { # Affected Rows in Chinese
-				$sql = "select " + $MailColumns + " FROM fn_trace_gettable(N'" + $_.FullName + "', 1) where EventClass in (" + $MailEventClasses + ") order by StartTime"
+				$sql = "execute savetableashtml @DBFetch='select " + $MailColumns + " FROM fn_trace_gettable(N^" + $_.FullName + "^, 1)', @DBWhere='EventClass in (" + $MailEventClasses + ")', @DBThere='StartTime'"
 				$output = & sqlcmd -S $AuditDBServer -U $AuditDBUserName -P $AuditDBPassword -Q "$($sql)" -d $AuditDB # Do some alerts for specified eventclasses				
 
-				if ($output -like "*(0 個受影響的資料列)*") { # No affected rows in Chinese
-				} else {
-					Send-MailMessage -To $MailTo -From $MailFrom -Subject "資料庫特權活動即時告警" -Body "$output" -SmtpServer $MailServer -Encoding ([System.Text.Encoding]::UTF8)
+				if ($output -like "*<table*") { # Have data to output
+					Send-MailMessage -To $MailTo -From $MailFrom -Subject "資料庫特權活動即時告警" -Body "$output" -BodyAsHtml -SmtpServer $MailServer -Encoding ([System.Text.Encoding]::UTF8)
 				}
 
         			Remove-Item $_.FullName
