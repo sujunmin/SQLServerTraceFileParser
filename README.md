@@ -12,6 +12,7 @@ Parse SQL Server Trace Files and Build Simple Alert System for Audit
 3. Set up arguments in `TraceFileParser.ps1`.
 4. Run and Test.
 5. Use `SaveTraceFile.ps1` to save data into files.
+6. This version will save data into database which is specified, and this is different from v1.
 
 ## To-Do
 1. ~~Alert mail content need to be html for clearifing output.~~ Use [this](https://www.virtualobjectives.com.au/sqlserver/saving_to_html.htm) for HTML Output, Please read the manual from the link.
